@@ -1,0 +1,357 @@
+/* Enhanced Styling for Landing page */
+.landingPageContainer {
+    width: 100vw;
+    min-height: 100vh;
+    background: url("/public/backgroung.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+.landingPageContainer nav {
+    padding: 1.2rem clamp(1rem, 5vw, 2rem) 1.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.landingPageContainer nav h2 {
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-weight: 500;
+}
+
+.landingPageContainer nav .navList {
+    display: flex;
+    gap: clamp(1rem, 3vw, 1.6rem);
+    cursor: pointer;
+    list-style: none;
+}
+
+.landingPageContainer nav .navList li {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.landingPageContainer nav .navList li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile menu button */
+.landingPageContainer nav .mobileMenuBtn {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.landingPageContainer nav .mobileMenuBtn span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 3px 0;
+    border-radius: 2px;
+}
+
+/* Styling for middle div text and mobile.png */
+.landingMainContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 clamp(2rem, 8vw, 4rem);
+    min-height: calc(100vh - 120px);
+    align-items: center;
+    gap: 2rem;
+}
+
+.landingMainContainer > div:nth-child(1) {
+    font-size: clamp(1.8rem, 4vw, 2.1rem);
+    flex: 1;
+    max-width: 600px;
+}
+
+.landingMainContainer > div:nth-child(1) h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.landingMainContainer > div:nth-child(1) p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.landingMainContainer > div:nth-child(1) div[role="button"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D97500;
+    padding: clamp(12px, 3vw, 16px) clamp(24px, 5vw, 32px);
+    border-radius: 8px;
+    cursor: pointer;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+    margin-top: 1.2rem;
+    border: none;
+}
+
+.landingMainContainer > div:nth-child(1) div[role="button"]:hover {
+    background-color: #B55f00;
+}
+
+.landingMainContainer > div:nth-child(1) div[role="button"] a {
+    text-decoration: none;
+    color: white;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Image/Visual section */
+.landingMainContainer > div:nth-child(2) {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingMainContainer > div:nth-child(2) img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .landingPageContainer nav .navList {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .landingPageContainer nav .navList.active {
+        display: flex;
+    }
+
+    .landingPageContainer nav .mobileMenuBtn {
+        display: flex;
+    }
+
+    .landingMainContainer {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 1.5rem;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .landingMainContainer > div:nth-child(1) {
+        order: 2;
+        max-width: 100%;
+    }
+
+    .landingMainContainer > div:nth-child(2) {
+        order: 1;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .landingPageContainer nav {
+        padding: 1rem;
+    }
+
+    .landingMainContainer {
+        padding: 0 1rem;
+        gap: 1.5rem;
+    }
+
+    .landingMainContainer > div:nth-child(2) {
+        max-width: 280px;
+    }
+}
+
+/* Home page styling */
+.meetContainer {
+  display: flex;
+  padding: 40px 5vw;
+  height: 87vh;
+  gap: 6vw;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
+}
+
+.leftPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 240px;
+  padding: 60px;
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.rightPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  padding: 30px;
+  animation: fadeInRight 0.6s ease-out;
+}
+
+.rightPanel > img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.rightPanel > img:hover {
+  transform: scale(1.03);
+}
+
+.leftPanel h2 {
+  font-size: 35px;
+  font-weight: bolder;
+  color: #004080;
+  margin-bottom: 10px;
+}
+
+/* Shrink input and button size */
+.leftPanel .MuiTextField-root {
+    height: 60px;
+    width: 250px;
+}
+
+.leftPanel .MuiButton-root {
+  font-size: 1rem;
+  padding: 20px 30px;
+  height: 55px;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.navBar {
+  width: 100%;
+  padding: 0.6rem clamp(1rem, 5vw, 2rem) 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e2a38;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Left side: Brand text */
+.navBar .navLeft h3 {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 700;
+  color: #FF9839;
+  margin: 0;
+}
+
+/* Right side: History + Logout */
+.navBar .navRight {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.6rem); /* gap between groups (History+Icon) and Logout button */
+}
+
+/* History group (icon + text tightly together) */
+.navBar .navRight .historyLink {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* minimal gap between icon and text */
+  cursor: pointer;
+  color: white;
+}
+
+/* Style History text */
+.navBar .navRight .historyLink p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Ensure icon is white */
+.navBar .navRight .historyLink .MuiIconButton-root {
+  color: white;
+  padding: 4px;
+}
+
+/* Logout button */
+.navBar .navRight .logoutBtn {
+  background-color: #D97500;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navBar .navRight .logoutBtn:hover {
+  background-color: #B55f00;
+}
+
+
+/* Responsive: stack layout for mobile */
+@media (max-width: 600px) {
+  .navBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .navBar .navRight {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
