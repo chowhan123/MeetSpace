@@ -2,15 +2,26 @@
 
 **MeetSpace** is a **Full-Stack video conferencing Web-Application** that enables users to **securely host and join virtual meetings** with built-in **Real-time chat functionality**. The platform includes features like **User Authentication**, **Meeting History Tracking**, and **Live Communication** using **WebRTC** and **Socket.io**. The frontend is developed with **React** and styled using **Material UI**, ensuring a **clean**, **intuitive**, and **responsive** user experience.
 
+## 🎯 Objectives and Scope
+**Objectives:**
+- Browser-based multi-user video calls
+- Real-time messaging
+- Secure JWT login/signup
+- Store & display meeting history
 
-## 🚀 Features
+**Scope:**
+- Multi-user P2P meetings
+- Private user history
+- Modular, scalable architecture
+- Desktop-first responsive design
 
-- 🔐 **Login/Signup Authentication** with token-based session handling  
-- 🧑‍🤝‍🧑 **Join/Host Meetings** via unique meeting codes  
-- 💬 **In-call Messaging** with real-time chat updates  
-- 🕓 **Meeting History Page** with date-wise tracking  
-- ⚙️ Responsive UI with **Material UI (MUI)** and **Vanilla CSS**  
-- 📦 Modular backend with Express, MongoDB, and Socket.io  
+## ✨ Key Features
+- 🔒 JWT-based authentication (login/signup)
+- 📞 Real-time video calling with WebRTC + Socket.IO
+- 💬 Instant chat messages during meetings
+- 🗓 View personal meeting history
+- 🎨 Material UI (MUI) styling + custom CSS
+- 🛠 Modular backend with clear controller & route structure
 
 
 ## 🛠️ Tech Stack
@@ -78,12 +89,13 @@
 - Token-based authentication using JWT
 - GitHub secret scanning was triggered; keys have been regenerated and removed from source
 
- ## 📎 Appendices and References
-  - React Documentation
-  - Node.js Documentation
-  - Socket.IO Docs
-  - Material UI
-  - MongoDB Docs
+## 📎 Appendices and References
+- [React Documentation](https://react.dev/)
+- [Node.js Documentation](https://nodejs.org/)
+- [Socket.IO Docs](https://socket.io/docs/)
+- [Material UI](https://mui.com/)
+- [MongoDB Docs](https://www.mongodb.com/docs/)
+
 
 ## 🙋‍♂️ Contact Details
 
