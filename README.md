@@ -78,6 +78,12 @@
 - Token-based authentication using JWT
 - GitHub secret scanning was triggered; keys have been regenerated and removed from source
 
+ ## 📎 Appendices and References
+  - React Documentation
+  - Node.js Documentation
+  - Socket.IO Docs
+  - Material UI
+  - MongoDB Docs
 
 ## 🙋‍♂️ Contact Details
 
