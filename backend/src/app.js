@@ -4,7 +4,9 @@ import mongoose from 'mongoose';
 import {connectToSocket} from './controllers/socketManager.js'; // Importing the socket connection manager
 import cors from 'cors';
 import userRoutes from './routes/userRoutes.js';
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 const server = createServer(app);  //app.js connected to server
 const io = connectToSocket(server);  // when server runs app and io both runs
@@ -19,8 +21,12 @@ app.use("/api/users", userRoutes);
 
 const start = async () => {
   // MongoDB connection
-  const MONGO_URI = "";
-  await mongoose.connect(MONGO_URI);
+  const uri = process.env.MONGO_URI;
+   if (!uri) {
+    console.error("MONGO_URI is not defined!");
+    process.exit(1);
+  }
+  await mongoose.connect(uri);
   console.log(`MongoDB connected successfully`);
 
   // Server connection
