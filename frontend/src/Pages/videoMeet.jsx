@@ -16,9 +16,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import VideoCameraFrontIcon from "@mui/icons-material/VideoCameraFront";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import server from "../environment";
 
-
-const server_url = "http://localhost:8000";
+const server_url = server; // Use production server URL for deployment
 var connections = {};
 const peerConfigConnections = {
     "iceServers": [

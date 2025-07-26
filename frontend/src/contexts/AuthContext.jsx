@@ -2,13 +2,14 @@ import axios from "axios";
 import httpStatus from "http-status";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import server from "../environment";
 
 // Create a Context to share auth-related data/functions across the app
 export const AuthContext = createContext({});
 
 // Setup axios instance
 const client = axios.create({
-    baseURL: `http://localhost:8000/api/users`
+    baseURL: `${server}/api/users`, // Use dev server for development
 })
 
 //  Auth Provider
