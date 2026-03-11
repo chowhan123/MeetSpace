@@ -2,6 +2,10 @@
 
 **MeetSpace** is a **Full-Stack video conferencing Web-Application** that enables users to **securely host and join virtual meetings** with built-in **Real-time chat functionality**. The platform includes features like **User Authentication**, **Meeting History Tracking**, and **Live Communication** using **WebRTC** and **Socket.io**. The frontend is developed with **React** and styled using **Material UI**, ensuring a **clean**, **intuitive**, and **responsive** user experience.
 
+## 🌐 Deployment Link
+🚀 **[Live Demo](https://meetspacefrontend.onrender.com)**  
+_(Click the link above to explore the live application!)_
+
 ## 🎯 Objectives and Scope
 **Objectives:**
 - Browser-based multi-user video calls
