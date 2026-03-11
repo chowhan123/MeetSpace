@@ -7,13 +7,13 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import { AuthContext } from '../contexts/AuthContext';
 
 function HomeComponent() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [meetingCode, setMeetingCode] = useState("");
     const { addToUserHistory } = useContext(AuthContext);
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
     const [codeError, setCodeError] = useState(false);
     const [errorText, setErrorText] = useState("");
-
+    const [isJoining, setIsJoining] = useState(false); // Loading state
 
     // Join Button validation code
     const handleJoinVideoCall = async () => {
@@ -39,37 +39,86 @@ function HomeComponent() {
         }
         
         try {
+            setIsJoining(true); // Show loading state
+            
             // Save the meeting join history
             await addToUserHistory(trimmedCode);
-            navigate(`/${trimmedCode}`);
+            
+            // Show success message
+            setSnackbar({ 
+                open: true, 
+                message: 'Joining meeting...', 
+                severity: 'success' 
+            });
+            
+            // Navigate to meeting room
+            setTimeout(() => {
+                navigate(`/${trimmedCode}`);
+            }, 500);
+            
         } catch (error) {
-            const errorMessage = error.response?.data?.message || 'Failed to join meeting';
-            setSnackbar({ open: true, message: errorMessage, severity: 'error' });
+            console.error("Failed to join meeting:", error);
+            
+            const errorMessage = error.response?.data?.message 
+                || error.message 
+                || 'Failed to join meeting. Please try again.';
+            
+            setSnackbar({ 
+                open: true, 
+                message: errorMessage, 
+                severity: 'error' 
+            });
+        } finally {
+            setIsJoining(false); // Reset loading state
         }
     };
 
+    // Handle Enter key press to join
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' && !codeError && meetingCode.trim()) {
+            handleJoinVideoCall();
+        }
+    };
+
+    // Handle logout
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setSnackbar({ 
+            open: true, 
+            message: 'Logged out successfully', 
+            severity: 'info' 
+        });
+        
+        setTimeout(() => {
+            navigate("/auth");
+        }, 1000);
+    };
 
     return (
         <>
             {/* Navbar Section */}
             <div className="navBar">
-                <div className= "navLeft" style={{ display: 'flex', alignItems: 'center' }}  >
-                    <h3> MeetSpace </h3>
+                <div className="navLeft" style={{ display: 'flex', alignItems: 'center' }}>
+                    <h3>MeetSpace</h3>
                 </div>
 
                 <div className="navRight" style={{ display: "flex", alignItems: "center" }}>
                     <div className='historyLink' onClick={() => navigate("/history")}>
-                        <IconButton onClick={() => { navigate("/history") }}>
+                        <IconButton 
+                            onClick={() => navigate("/history")}
+                            aria-label="View meeting history"
+                        >
                             <RestoreIcon />
                         </IconButton>
                         <p>History</p>
                     </div>
 
                     {/* Logout button */}
-                    <Button className= "logoutBtn" onClick={() => {
-                        localStorage.removeItem("token");
-                        navigate("/auth") // Redirect to auth page
-                    }}>
+                    <Button 
+                        className="logoutBtn" 
+                        onClick={handleLogout}
+                        aria-label="Logout"
+                    >
                         Logout
                     </Button>
                 </div>
@@ -79,53 +128,64 @@ function HomeComponent() {
             <div className="meetContainer">
                 <div className='leftPanel'>
                     <div>
-                        <h2>Providing Quality video Call Just Like Quality Education</h2>
+                        <h2>Providing Quality Video Call Just Like Quality Education</h2>
                         <br />
-                        <div style={{ display: 'flex', gap: "10px" }}>
+                        <div style={{ display: 'flex', gap: "10px", alignItems: 'flex-start' }}>
                             <TextField
-                              id="meeting-code"
-                              label="Meeting Code"
-                              variant="outlined"
-                              value={meetingCode}
-                              onChange={(e) => {
-                                const value = e.target.value;
+                                id="meeting-code"
+                                label="Meeting Code"
+                                variant="outlined"
+                                value={meetingCode}
+                                onChange={(e) => {
+                                    const value = e.target.value;
 
-                                // Update value first
-                                setMeetingCode(value);
+                                    // Update value first
+                                    setMeetingCode(value);
 
-                                // Validation logic
-                                if (!/^[a-zA-Z0-9]*$/.test(value)) {
-                                  setCodeError(true);
-                                   setErrorText("Only letters and numbers are allowed.");
-                                } else if (value.length > 0 && value.length < 5) {
-                                    setCodeError(true);
-                                    setErrorText("Wrong Meeting Code");
-                                } else {
-                                    setCodeError(false);
-                                    setErrorText("");
-                                }
-                              }}
-                               error={codeError}
-                               helperText={codeError ? errorText : ""}
-                               sx={{ width: '200px' }}
+                                    // Validation logic
+                                    if (value && !/^[a-zA-Z0-9]*$/.test(value)) {
+                                        setCodeError(true);
+                                        setErrorText("Only letters and numbers are allowed.");
+                                    } else if (value.length > 0 && value.length < 5) {
+                                        setCodeError(true);
+                                        setErrorText("Minimum 5 characters required");
+                                    } else {
+                                        setCodeError(false);
+                                        setErrorText("");
+                                    }
+                                }}
+                                onKeyPress={handleKeyPress}
+                                error={codeError}
+                                helperText={codeError ? errorText : "Enter a 5+ character code"}
+                                sx={{ width: '200px' }}
+                                disabled={isJoining}
+                                autoComplete="off"
+                                inputProps={{
+                                    maxLength: 20,
+                                    'aria-label': 'Meeting code input'
+                                }}
                             />
 
                             <Button
-                               onClick={handleJoinVideoCall}
-                               variant='contained'
-                               sx={{ height: '40px', padding: '0 16px', fontSize: '0.8rem' }} 
-                            
+                                onClick={handleJoinVideoCall}
+                                variant='contained'
+                                disabled={isJoining || codeError || !meetingCode.trim()}
+                                sx={{ 
+                                    height: '56px', 
+                                    padding: '0 24px', 
+                                    fontSize: '0.9rem',
+                                    minWidth: '80px'
+                                }}
                             >
-                                Join
+                                {isJoining ? 'Joining...' : 'Join'}
                             </Button>
                         </div>
-
                     </div>
                 </div>
 
                 {/* Right Panel with image */}
                 <div className="rightPanel">
-                    <img src='/videoCall.png' alt='Logo' />
+                    <img src='/videoCall.png' alt='Video call illustration' />
                 </div>
             </div>
 
@@ -136,7 +196,12 @@ function HomeComponent() {
                 onClose={() => setSnackbar({ ...snackbar, open: false })}
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
-                <Alert onClose={() => setSnackbar({ ...snackbar, open: false })} severity={snackbar.severity} sx={{ width: '100%' }}>
+                <Alert 
+                    onClose={() => setSnackbar({ ...snackbar, open: false })} 
+                    severity={snackbar.severity} 
+                    sx={{ width: '100%' }}
+                    variant="filled"
+                >
                     {snackbar.message}
                 </Alert>
             </Snackbar>
